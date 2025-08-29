@@ -1,0 +1,58 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+/* --- Global Variable for Your New Theme --- */
+:root {
+  --primary-color: #20c997; /* New Teal Primary Color */
+  --text-color: #343a40; /* Dark Grey for Text */
+  --background-color: #f8f9fa; /* Soft Off-White Background */
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif; /* Changed Font */
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100vh;
+  background-color: var(--background-color); /* Applied new background */
+  color: var(--text-color); /* Applied new default text color */
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  transition: color 0.3s ease; /* Smooth transition for links */
+}
+
+a:hover {
+  color: var(--primary-color); /* Links will turn teal on hover */
+}
+
+.app {
+  width: 80%;
+  margin: auto;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+/* --- You will need to update other CSS files to use var(--primary-color) --- */
+/* For example, in your Navbar.css or Button.css, you would find: */
+/* button { background-color: tomato; } */
+/* and change it to: */
+/* button { background-color: var(--primary-color); } */
+
+@media (max-width: 1050px) {
+  .app {
+    width: 90%;
+  }
+}

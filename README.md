@@ -2,7 +2,7 @@
 
 Welcome to Forkify, a comprehensive MERN stack food delivery web application. This project features a complete user-facing frontend, a powerful admin panel for managing the restaurant, and a robust backend to tie it all together.
 
-[**Live Demo**](forkify-food-delivery-app.vercel.app)
+[**Live Demo**](https://forkify-food-delivery-app.vercel.app)
 
 ## Key Features
 

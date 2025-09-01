@@ -1,37 +1,44 @@
-import React, { useState } from 'react'
-import Home from './pages/Home/Home'
-import Footer from './components/Footer/Footer'
-import Navbar from './components/Navbar/Navbar'
-import { Route, Routes } from 'react-router-dom'
-import Cart from './pages/Cart/Cart'
-import LoginPopup from './components/LoginPopup/LoginPopup'
-import PlaceOrder from './pages/PlaceOrder/PlaceOrder'
-import MyOrders from './pages/MyOrders/MyOrders'
+import React from 'react';
+import { Route, Routes, Navigate } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import Verify from './pages/Verify/Verify'
+
+// Layouts and Pages
+import MainLayout from './layouts/MainLayout';
+import Home from './pages/Home/Home';
+import Cart from './pages/Cart/Cart';
+import PlaceOrder from './pages/PlaceOrder/PlaceOrder';
+import MyOrders from './pages/MyOrders/MyOrders';
+import Verify from './pages/Verify/Verify';
+import Login from './pages/Login/Login';
+import Register from './pages/Register/Register';
+import ProtectedRoute from './components/ProtectedRoute';
 
 const App = () => {
-
-  const [showLogin,setShowLogin] = useState(false);
-
   return (
     <>
-    <ToastContainer/>
-    {showLogin?<LoginPopup setShowLogin={setShowLogin}/>:<></>}
-      <div className='app'>
-        <Navbar setShowLogin={setShowLogin}/>
-        <Routes>
-          <Route path='/' element={<Home />}/>
-          <Route path='/cart' element={<Cart />}/>
-          <Route path='/order' element={<PlaceOrder />}/>
-          <Route path='/myorders' element={<MyOrders />}/>
-          <Route path='/verify' element={<Verify />}/>
-        </Routes>
-      </div>
-      <Footer />
-    </>
-  )
-}
+      <ToastContainer />
+      <Routes>
+        {/* Routes WITHOUT Navbar and Footer */}
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
 
-export default App
+        {/* Routes WITH Navbar and Footer */}
+        <Route element={<MainLayout />}>
+          <Route element={<ProtectedRoute />}>
+            <Route path='/' element={<Home />} />
+            <Route path='/cart' element={<Cart />} />
+            <Route path='/order' element={<PlaceOrder />} />
+            <Route path='/myorders' element={<MyOrders />} />
+            <Route path='/verify' element={<Verify />} />
+          </Route>
+        </Route>
+
+        {/* Fallback to home if logged in, otherwise it will be handled by ProtectedRoute */}
+        <Route path="*" element={<Navigate to="/" />} />
+      </Routes>
+    </>
+  );
+};
+
+export default App;
